@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:14.4-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: ecommerce
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+ 
+  web:
+      build: .
+      ports:
+        - "5000:5000"
+      depends_on:
+        db:
+          condition: service_healthy
+ 
+volumes:
+  pgdata:
