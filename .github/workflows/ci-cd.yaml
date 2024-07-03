@@ -23,6 +23,6 @@ jobs:
           - name: Checkout repository
             uses: actions/checkout@v4
           - name: Pull Image from Docker Hub
-            run: docker pull pabloesdev/fastapi-app:latest
+            run: sudo docker pull pabloesdev/fastapi-app:latest
           - name: Run Docker Container
             run: sudo docker compose -f ${{ github.workspace }}/pg-docker-compose.yml up -d
