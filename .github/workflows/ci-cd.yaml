@@ -27,4 +27,4 @@ jobs:
               sudo docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
               sudo docker pull pabloesdev/fastapi-app:latest
           - name: Run Docker Container
-            run: sudo docker compose up -d
+            run: sudo docker compose up -f ${{ github.workspace }}/pg-docker-compose.yml -d
