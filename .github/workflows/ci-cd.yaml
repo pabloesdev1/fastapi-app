@@ -1,0 +1,23 @@
+name: CICD Workflow
+on:  
+  push:    
+    branches: 
+      main
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+        - name: Build and Push Image to Registry
+          run: |
+            docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+            docker build . -t pabloesdev/fastapi-app:latest
+            docker push pabloesdev/fastapi-app:latest
+
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
